@@ -4,8 +4,7 @@ from django.contrib import admin
 from .models import *
 
 admin.site.register(User)
-admin.site.register(bloodProvider)
-admin.site.register(bloodReciever)
-admin.site.register(bloodGroup)
+admin.site.register(bloodStock)
+admin.site.register(order)
 
 
