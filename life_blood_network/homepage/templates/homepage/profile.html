@@ -1,0 +1,22 @@
+{% extends 'homepage/layout.html'%}
+
+{% load static %}
+
+{% block body %}
+  <h1>life-blood network</h1>
+
+  <!-- drop down menus  -->
+  <div class="row">
+    <div class="col">
+      {% if request.user %}
+        {{ request.user }}
+      {% endif %}
+
+      <!-- // profile form -->
+      <form action="#">
+        {{ form }}
+        <button type="submit">Save Changess</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

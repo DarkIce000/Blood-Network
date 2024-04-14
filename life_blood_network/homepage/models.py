@@ -3,14 +3,17 @@ from django.contrib.auth.models import AbstractUser
 
 
 # Create your models here.
-class User(AbstractUser, models.Model):
+class User(AbstractUser):
     USER_TYPE =(
         ('provider', 'provider'),
         ('reciever', 'reciever'),
     )
+    contact_no = models.CharField(max_length=20, blank=True)
+    address = models.CharField(max_length=200, blank=True)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
     user_type = models.CharField(max_length=20, choices=USER_TYPE)
-    address = models.CharField(max_length=200)
-    contact_no = models.CharField(max_length=20)
+
 
 class bloodStock(models.Model):
     BLOOD_TYPE = (
@@ -32,3 +35,4 @@ class order(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     blood_type = models.ForeignKey(bloodStock, on_delete=models.PROTECT)
     quantity = models.IntegerField(default=0)
+    address = models.CharField(max_length=200)

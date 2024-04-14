@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from .models import User 
+from .forms import ProfilePageForm, BloodStockForm, RegistrationForm
 
 @login_required(login_url="login_view")
 def index(request):   
@@ -17,8 +18,18 @@ def blood_info_page_view(request):
     return render(request, "homepage/blood_info_page.html", {
         "message": "Homepage"
     })
-    pass 
+    
 
+@login_required(login_url="login_view")
+def my_profile_view(request):
+    user = User.objects.get(username=request.user) 
+    form = ProfilePageForm(instance=user)
+    if request.method == "POST":
+        formtosave= ProfilePageForm(request.POST)
+        return HttpResponseRedirect(reverse('my_profile'))
+    return render(request, "homepage/profile.html", {
+        "form": form
+    })
 
 def order_page_view(request):
     return render(request, "homepage/order_page.html", {
@@ -58,18 +69,21 @@ def logout_view(request):
 
 def register_view(request):
     if request.method == "POST":
-        print(request.POST)
-        first_name = request.POST["first_name"]
-        last_name = request.POST["last_name"]
-        username = request.POST["username"]
-        email = request.POST["email"]
-        contact_no = request.POST["contact"]
-        address = request.POST["address"]
-        user_type = request.POST["user_type"]
-
+        # print(request.POST)
+        # first_name = request.POST["first_name"]
+        # last_name = request.POST["last_name"]
+        # username = request.POST["username"]
+        # email = request.POST["email"]
+        # contact_no = request.POST["contact"]
+        # address = request.POST["address"]
+        # city = request.POST['city']
+        # state = request.POST['state']
+        # user_type = request.POST["user_type"]
+        user = RegistrationForm(request.POST)
+        
         # Ensure password matches confirmation
         password = request.POST["password"]
-        confirmation = request.POST["cnfpassword"]
+        confirmation = request.POST["confirm_password"]
         if password != confirmation:
             return render(request, "mail/register.html", {
                 "message": "Passwords must match."
@@ -77,23 +91,30 @@ def register_view(request):
 
         # Attempt to create new user
         try:
-            user = User.objects.create_user(
-                first_name=first_name,
-                last_name=last_name,
-                username=username, 
-                email=email, 
-                contact_no=contact_no, 
-                address=address, 
-                user_type=user_type
-                )
-            
-            user.save()
+            # user = User.objects.create_user(
+            #     first_name=first_name,
+            #     last_name=last_name,
+            #     username=username, 
+            #     email=email, 
+            #     contact_no=contact_no, 
+            #     city=city,
+            #     state=state,
+            #     address=address, 
+            #     user_type=user_type
+            #     )
+
+            new_user = user.save(commit=False)
+            new_user.password = makepassword(new_user.password)
         except IntegrityError as e:
             print(e)
             return render(request, "homepage/register.html", {
                 "message": "Email address already taken."
             })
-        login(request, user)
+        
+        login(request, new_user)
         return HttpResponseRedirect(reverse("index_page_view"))
     else:
-        return render(request, "homepage/register.html")
+        form = RegistrationForm()
+        return render(request, "homepage/register.html", {
+            "form": form
+        })
