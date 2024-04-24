@@ -103,8 +103,7 @@ def register_view(request):
             #     user_type=user_type
             #     )
 
-            new_user = user.save(commit=False)
-            new_user.password = makepassword(new_user.password)
+            new_user = user.save()
         except IntegrityError as e:
             print(e)
             return render(request, "homepage/register.html", {

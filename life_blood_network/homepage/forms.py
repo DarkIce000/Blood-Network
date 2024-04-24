@@ -37,7 +37,7 @@ class RegistrationForm(forms.ModelForm):
             'password',
             'confirm_password',
             'email',
-            'conal ntact_no',
+            'contact_no',
             'address',
             'city',
             'state',
