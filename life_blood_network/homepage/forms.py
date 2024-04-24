@@ -1,5 +1,6 @@
 from django import forms
 from .models import User, bloodStock
+from django.contrib.auth.forms import UserCreationForm
 
 class ProfilePageForm(forms.ModelForm):
     class Meta:
@@ -26,7 +27,7 @@ class BloodStockForm(forms.ModelForm):
         )
 
 
-class RegistrationForm(forms.ModelForm):
+class RegistrationForm(UserCreationForm):
     confirm_password = forms.CharField(max_length=30)
     class Meta:
         model = User
@@ -34,8 +35,8 @@ class RegistrationForm(forms.ModelForm):
             'first_name',
             'last_name',
             'username',
-            'password',
-            'confirm_password',
+            'password1',
+            'password2',
             'email',
             'contact_no',
             'address',

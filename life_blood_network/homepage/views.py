@@ -91,7 +91,7 @@ def register_view(request):
 
         # Attempt to create new user
         try:
-            # user = User.objects.create_user(
+            user = User.objects.create_user()
             #     first_name=first_name,
             #     last_name=last_name,
             #     username=username, 
@@ -103,14 +103,14 @@ def register_view(request):
             #     user_type=user_type
             #     )
 
-            new_user = user.save()
+            user.save()
         except IntegrityError as e:
             print(e)
             return render(request, "homepage/register.html", {
                 "message": "Email address already taken."
             })
         
-        login(request, new_user)
+        login(request, user)
         return HttpResponseRedirect(reverse("index_page_view"))
     else:
         form = RegistrationForm()
