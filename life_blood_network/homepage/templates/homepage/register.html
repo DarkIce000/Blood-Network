@@ -5,6 +5,14 @@
 {% block body %}
   <h1>Register Yourself</h1>
 <div class="row justify-content-center">
+
+	{% if message %}
+		<div class="alert alert-danger" role="alert">
+			{{ message }}
+			<button type="button text-align-end" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+	{% endif %}
+
 	<div class="col-8">
 		<form action="{% url 'register_view' %}" method="post">
 			{% csrf_token %}

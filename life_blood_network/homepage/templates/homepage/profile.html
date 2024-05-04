@@ -13,7 +13,9 @@
       {% endif %}
 
       <!-- // profile form -->
-      <form action="#">
+      <form action="{% url 'my_profile' %}" method="post">
+        {% csrf_token %}
+
         {{ form }}
         <button type="submit">Save Changess</button>
       </form>

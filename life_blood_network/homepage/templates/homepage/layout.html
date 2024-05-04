@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col">
             <!-- add here anything in between  -->
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <nav class="navbar navbar-expand-lg">
                 <div class="container-fluid">
                   <a class="navbar-brand" href="#">Life-blood-network</a>
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,6 +37,11 @@
                       <li class="nav-item">
                         <a class="nav-link" href="{% url 'order_page_view'%}">My Orders</a>
                       </li>
+
+                      <li class="nav-item">
+                        <a class="nav-link" href="{% url 'add_blood_page_view'%}">Add Blood-Stock</a>
+                      </li>
+
                       <li class="nav-item">
                         <a class="nav-link" href="{% url 'my_profile' %}">My Profile</a>
                       </li>

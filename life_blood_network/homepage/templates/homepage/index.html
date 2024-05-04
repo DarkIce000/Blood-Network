@@ -3,7 +3,6 @@
 {% load static %}
 
 {% block body %}
-  <h1>life-blood network</h1>
 
   <!-- drop down menus  -->
   <div class="row">
@@ -12,11 +11,13 @@
     </div>
 
     <div class="col">
-
+        <h1>Index Page Implementation</h1>
     </div>
 
     <div class="col">
-
+      {% for listing in list%}
+        <p>{{ listing.blood_bank }} -> {{ listing.blood_type }} ->{{ listing.quantity }} -> {{listing.blood_bank.address}}</p>
+      {% endfor %}
     </div>
     <!-- for refreshing the data  -->
 

@@ -11,6 +11,7 @@ urlpatterns = [
    path("login", views.login_view, name="login_view"),
    path("register", views.register_view, name="register_view"),
    path("logout", views.logout_view, name="logout_view"),
-   path("profile", views.my_profile_view, name="my_profile")
+   path("profile", views.my_profile_view, name="my_profile"),
+   path("<int:listing_id>", views.blood_info_page_view, name="info_page")
 ]
 # ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
