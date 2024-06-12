@@ -2,28 +2,48 @@
 
 {% load static %}
 
+  {% block style %}
+    <link rel="stylesheet" href="{% static 'homepage/style.css' %}">
+  {% endblock %}
+
 {% block body %}
 
-  <!-- drop down menus  -->
-  <div class="row">
-    <div class="col">
-      
-    </div>
+<!-- drop down menus  -->
+<div class="row mt-5">
 
-    <div class="col">
-        <h1>Index Page Implementation</h1>
-    </div>
-
-    <div class="col">
-      {% for listing in list%}
-        <p>{{ listing.blood_bank }} -> {{ listing.blood_type }} ->{{ listing.quantity }} -> {{listing.blood_bank.address}}</p>
-      {% endfor %}
-    </div>
-    <!-- for refreshing the data  -->
-
-    <div class="row" id="data-div">
-
-    </div>
-    
+  <div class="col">
+    <form action="{% url 'search_page' %}">
+      <div class="input-group input-group-lg mb-3">
+        <input type="text" class="form-control" name="query" placeholder="Search like: city" aria-label="Search"
+          aria-describedby="button-addon2">
+        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
+      </div>
+    </form>
   </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col">
+    <!-- list -->
+    <ol class="list-group list-group-numbered" id="listTable">
+      {% for listing in list %}
+        <li data-listId="{{ listing.id }}" class="list-group-item d-flex justify-content-between align-items-start ">
+          <div data-listId="{{ listing.id }}" class="ms-2 me-auto bloodList" id="bloodBankDetails">
+            <div class="fw-bold bloodList" data-listId="{{ listing.id }}">{{listing.blood_bank}}</div>
+            {{listing.blood_bank.address}}
+          </div>
+          <span class="badge text-bg-danger rounded-pill bloodList" data-listId="{{ listing.id }}">{{listing.blood_type}}</span>
+        </li>
+      {% endfor %}
+    </ol>
+  </div>
+
+</div>
 {% endblock %}
+
+{% block script %}
+      <script src="{% static 'homepage/index.js'%}"></script>
+{% endblock %}
+

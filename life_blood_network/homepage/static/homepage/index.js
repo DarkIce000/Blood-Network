@@ -1,4 +1,9 @@
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('#refresh-data').addEventListener('click', refreshData)
-    
-})
+let bloodBankDetails = document.getElementById('listTable');
+bloodBankDetails.addEventListener('click', function (event){
+    let link = event.target.dataset.listid;
+    if (!link) return;
+    window.open(link, '_self');
+});
+
+
+// Searching functionality 

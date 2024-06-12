@@ -8,6 +8,7 @@ from django.urls import reverse
 from .models import User, bloodStock, order
 from .forms import ProfilePageForm, BloodStockForm, RegistrationForm
 
+
 @login_required(login_url="login_view")
 def index(request):
     list = bloodStock.objects.all()
@@ -18,13 +19,20 @@ def index(request):
     })
 
 
-def blood_info_page_view(request):
+def blood_info_page_view(request, listing_id):
+    
     if request.method == "POST":
         return HttpResponse(f'query group')
+
     return render(request, "homepage/blood_info_page.html", {
-        "message": "Homepage"
+        "message": f'Description page {listing_id}'
     })
-    
+
+def search(request):
+    search_result = bloodStock.objects.filter(blood_bank__address__icontains=f'{request.GET["query"]}')
+    return render(request, "homepage/index.html", {
+        "list": search_result
+    })
 
 @login_required(login_url="login_view")
 def my_profile_view(request):
@@ -54,13 +62,14 @@ def order_page_view(request):
 @login_required(login_url="login_view")
 def add_blood_view(request):
     blood_bank = User.objects.get(username=request.user) 
+
     # creating instance of the blood_stock 
     blood_stock = bloodStock(blood_bank=blood_bank)
-
     add_blood_form = BloodStockForm
+
     if request.method == "POST":
-        print(request.POST)
-        add_blood = add_blood_form(request.POST, instance=blood_stock )
+
+        add_blood = add_blood_form(request.POST, instance=blood_stock)
 
         # form validity and usr_type is bloodbank
         if add_blood.is_valid():
@@ -78,6 +87,8 @@ def add_blood_view(request):
     })
 
 
+
+# loging handling functions 
 def login_view(request):
     if request.method == "POST":
         # Attempt to sign user in

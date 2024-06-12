@@ -4,23 +4,25 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 
-STYLE = { 
+BOOTSTRAP_CLASS = { 
     'class': 'form-control my-2',
 }
 
 
 STYLE_2 ={
-            'address': forms.Textarea(attrs=STYLE),
-            'first_name': forms.TextInput(attrs=STYLE),
-            'last_name': forms.TextInput(attrs=STYLE),
-            'username': forms.TextInput(attrs=STYLE),
-            'email': forms.TextInput(attrs=STYLE),
-            'password1': forms.PasswordInput(attrs=STYLE),
-            'password2': forms.PasswordInput(attrs=STYLE),
-            'contact_no': forms.TextInput(attrs=STYLE),
-            'city': forms.TextInput(attrs=STYLE),
-            'state': forms.TextInput(attrs=STYLE),
-            'user_type': forms.Select(choices=User.USER_TYPE, attrs=STYLE)
+            'address': forms.Textarea(attrs=BOOTSTRAP_CLASS),
+            'first_name': forms.TextInput(attrs=BOOTSTRAP_CLASS),
+            'last_name': forms.TextInput(attrs=BOOTSTRAP_CLASS),
+            'username': forms.TextInput(attrs=BOOTSTRAP_CLASS),
+            'email': forms.TextInput(attrs=BOOTSTRAP_CLASS),
+            'password1': forms.PasswordInput(attrs=BOOTSTRAP_CLASS),
+            'password2': forms.PasswordInput(attrs=BOOTSTRAP_CLASS),
+            'contact_no': forms.TextInput(attrs=BOOTSTRAP_CLASS),
+            'city': forms.TextInput(attrs=BOOTSTRAP_CLASS),
+            'state': forms.TextInput(attrs=BOOTSTRAP_CLASS),
+            'user_type': forms.Select(choices=User.USER_TYPE, attrs=BOOTSTRAP_CLASS),
+            'blood_type': forms.Select(choices=bloodStock.BLOOD_TYPE, attrs=BOOTSTRAP_CLASS), 
+            'quantity': forms.NumberInput(attrs=BOOTSTRAP_CLASS)
         }   
 
 
@@ -48,6 +50,7 @@ class BloodStockForm(forms.ModelForm):
             'blood_type', 
             'quantity'
         )
+        widgets = STYLE_2
 
 
 class RegistrationForm(UserCreationForm):
@@ -99,5 +102,7 @@ class order(forms.ModelForm):
         'id_proof'
         'id_proof_patient'
     )
+
+    widgets = STYLE_2
 
     
