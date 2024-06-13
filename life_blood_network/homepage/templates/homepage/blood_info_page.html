@@ -3,12 +3,16 @@
 {% load static %}
 
 {% block body %}
-  <h1>life-blood network</h1>
+  <h1>Fill out the Forms </h1>
 
   <!-- drop down menus  -->
   <div class="row">
     <div class="col">
-      {{ message }}
+
+      {{ blood_details.id }}
+      {{ blood_details.quantity }}
+      {{ blood_details.blood_bank.username }}
+      {{ blood_details.blood_bank.address }}
     </div>
   </div>
 {% endblock %}

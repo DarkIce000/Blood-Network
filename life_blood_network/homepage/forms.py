@@ -10,6 +10,7 @@ BOOTSTRAP_CLASS = {
 
 
 STYLE_2 ={
+            'profile_img': forms.FileInput(attrs=BOOTSTRAP_CLASS),
             'address': forms.Textarea(attrs=BOOTSTRAP_CLASS),
             'first_name': forms.TextInput(attrs=BOOTSTRAP_CLASS),
             'last_name': forms.TextInput(attrs=BOOTSTRAP_CLASS),
@@ -32,6 +33,7 @@ class ProfilePageForm(forms.ModelForm):
         fields = (
             'first_name',
             'last_name',
+            'profile_img',
             'email',
             'address',
             'city',
@@ -76,6 +78,7 @@ class RegistrationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
         fields = (
+            'profile_img',
             'first_name',
             'last_name',
             'username',
@@ -98,7 +101,7 @@ class order(forms.ModelForm):
         'blood_type'
         'quantity'
         'address'
-        'prescription'
+        'prescription_img'
         'id_proof'
         'id_proof_patient'
     )

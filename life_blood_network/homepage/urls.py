@@ -16,3 +16,5 @@ urlpatterns = [
    path("<int:listing_id>", views.blood_info_page_view, name="info_page")
 ]
 # ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

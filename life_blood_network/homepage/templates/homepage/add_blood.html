@@ -3,14 +3,16 @@
 {% load static %}
 
 {% block body %}
-  <h1>life-blood network</h1>
    {{ message }}
   <!-- drop down menus  -->
-  <div class="row">
-    <form action="{% url 'add_blood_page_view'%}" method="post">
-      {% csrf_token %}
-      {{ form }}
-     <button type="submit"> Submit</button>
-    </form>
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <h1>Add More Stock If Available</h1>
+      <form action="{% url 'add_blood_page_view'%}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="btn btn-danger"> Submit</button>
+      </form>
+    </div>
   </div>
 {% endblock %}

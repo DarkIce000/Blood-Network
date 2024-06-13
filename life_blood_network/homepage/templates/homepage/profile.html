@@ -3,21 +3,35 @@
 {% load static %}
 
 {% block body %}
-  <h1>life-blood network</h1>
 
   <!-- drop down menus  -->
-  <div class="row">
-    <div class="col">
+  <div class="row justify-content-center align-items-center">
+      <div class="col-4">
+        {% if profile_img.url %}
+          <img class="img-fluid rounded-pill mb-3" style="width:200px; height: 200px;" src="{{ profile_img.url }}" alt="">
+        {% else %}
+          <p><strong>No Image</strong></p>
+        {% endif %}
+      </div>
+
+      <div class="col-4 ">
+        <H1>Update Profile</H1>
+      </div>
+
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-8 ">
       {% if request.user %}
-        {{ request.user }}
+        <p> <strong>Username: </strong>{{ request.user }}</p>
       {% endif %}
 
       <!-- // profile form -->
-      <form action="{% url 'my_profile' %}" method="post">
+      <form action="{% url 'my_profile' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
         {{ form }}
-        <button type="submit">Save Changess</button>
+        <button type="submit" class="btn btn-primary d-flex">Save Changess</button>
       </form>
     </div>
   </div>

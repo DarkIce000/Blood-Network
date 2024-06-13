@@ -3,8 +3,15 @@
 {% load static %}
 
 {% block body %}
-  <h1>Register Yourself</h1>
+
 <div class="row justify-content-center">
+	<div class="col-8 d-flex justify-content-center">
+		<h1 class="">Register Yourself</h1>
+	</div>
+</div>
+
+<div class="row justify-content-center">
+
 
 	{% if message %}
 		<div class="alert alert-danger" role="alert">
@@ -14,7 +21,7 @@
 	{% endif %}
 
 	<div class="col-8">
-		<form action="{% url 'register_view' %}" method="post">
+		<form action="{% url 'register_view' %}" method="post" enctype="multipart/form-data">
 			{% csrf_token %}
 			
 			{{ form }}

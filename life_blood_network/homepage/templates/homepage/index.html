@@ -2,41 +2,45 @@
 
 {% load static %}
 
-  {% block style %}
-    <link rel="stylesheet" href="{% static 'homepage/style.css' %}">
-  {% endblock %}
+{% block title%}Blood Network{% endblock %}
+
+{% block style %}<link rel="stylesheet" href="{% static 'homepage/style.css' %}" />{% endblock %}
 
 {% block body %}
 
 <!-- drop down menus  -->
-<div class="row mt-5">
+<div class="row mt-5 justify-content-center">
 
-  <div class="col">
+  <div class="col-8">
     <form action="{% url 'search_page' %}">
       <div class="input-group input-group-lg mb-3">
-        <input type="text" class="form-control" name="query" placeholder="Search like: city" aria-label="Search"
+        <input type="text" class="form-control" name="query" placeholder="Search: city" aria-label="Search"
           aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
+        <button class="btn btn-outline-danger" type="submit" id="button-addon2">Search</button>
       </div>
     </form>
   </div>
 
 </div>
 
-<div class="row">
+<div class="row justify-content-center">
 
-  <div class="col">
+  <div class="col-8">
     <!-- list -->
     <ol class="list-group list-group-numbered" id="listTable">
-      {% for listing in list %}
-        <li data-listId="{{ listing.id }}" class="list-group-item d-flex justify-content-between align-items-start ">
-          <div data-listId="{{ listing.id }}" class="ms-2 me-auto bloodList" id="bloodBankDetails">
-            <div class="fw-bold bloodList" data-listId="{{ listing.id }}">{{listing.blood_bank}}</div>
-            {{listing.blood_bank.address}}
-          </div>
-          <span class="badge text-bg-danger rounded-pill bloodList" data-listId="{{ listing.id }}">{{listing.blood_type}}</span>
-        </li>
-      {% endfor %}
+      {% if not list %}
+        <h4 class="align-self-center">No Data</h4>
+      {% else %}
+        {% for listing in list %}
+          <li data-listId="{{ listing.id }}" class="list-group-item d-flex justify-content-between align-items-start blood-list">
+            <div data-listId="{{ listing.id }}" class="ms-2 me-auto blood-list" id="bloodBankDetails">
+              <div class="fw-bold blood-list" data-listId="{{ listing.id }}">{{listing.blood_bank.first_name}}</div>
+              {{listing.blood_bank.address}}
+            </div>
+            <span class="badge text-bg-danger rounded-pill" data-listId="{{ listing.id }}">{{listing.blood_type}}</span>
+          </li>
+        {% endfor %}
+      {% endif %}
     </ol>
   </div>
 
