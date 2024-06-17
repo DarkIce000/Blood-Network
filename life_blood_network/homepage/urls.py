@@ -4,16 +4,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-   path("", views.index, name="index_page_view"),
-   path("my_orders", views.order_page_view, name="order_page_view"),
-   path("blood_info_page", views.blood_info_page_view, name="blood_info_page_view"),
-   path("add_blood", views.add_blood_view, name="add_blood_page_view"),
+   path("", views.index, name="index_view"),
+   path("my-orders", views.my_order, name="my_orders_view"),
+   path("add-blood", views.add_blood, name="add_blood_view"),
    path("login", views.login_view, name="login_view"),
-   path("register", views.register_view, name="register_view"),
+   path("register", views.register, name="register_view"),
    path("logout", views.logout_view, name="logout_view"),
-   path("profile", views.my_profile_view, name="my_profile"),
-   path("search", views.search, name="search_page"),
-   path("<int:listing_id>", views.blood_info_page_view, name="info_page")
+   path("profile", views.my_profile, name="my_profile_view"),
+   path("search", views.search, name="search_view"),
+   path("approval", views.approval, name="approval_view"),
+   path("<int:listing_id>", views.blood_info, name="blood_info_view")
 ]
 # ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 if settings.DEBUG:

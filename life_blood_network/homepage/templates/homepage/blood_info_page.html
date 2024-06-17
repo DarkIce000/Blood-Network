@@ -3,16 +3,52 @@
 {% load static %}
 
 {% block body %}
-  <h1>Fill out the Forms </h1>
 
-  <!-- drop down menus  -->
-  <div class="row">
-    <div class="col">
-
-      {{ blood_details.id }}
-      {{ blood_details.quantity }}
-      {{ blood_details.blood_bank.username }}
-      {{ blood_details.blood_bank.address }}
-    </div>
+<!-- drop down menus  -->
+<div class="row justify-content-evenly align-items-center">
+  <div class="col-3 p-3 shadow-lg  border border-danger-subtle rounded">
+    <!-- table goes here for details showing  -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Blood Type</th>
+          <td><span class="badge text-bg-danger rounded-pill" >{{blood_details.blood_type}}</span></td>
+        </tr>
+        <tr>
+          <th scope="row">Stock</th>
+          <td>{{ blood_details.quantity }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Blood Bank Name</th>
+          <td colspan="2">{{blood_details.blood_bank.first_name}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Address</th>
+          <td colspan="2">{{blood_details.blood_bank.address}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Contact Options</th>
+          <td colspan="2">{{blood_details.blood_bank.contact_no}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+  
+  <div class="col-6 p-3 border border-danger-subtle rounded mt-5 shadow-lg" >
+    
+    <h1>Fill out the Form </h1>
+    <form action="{% url 'blood_info_view' blood_details.id %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ order_form }}
+      <button type="submit" class="btn btn-outline-danger">Submit</button>
+    </form>
+    
+  </div>
+</div>
 {% endblock %}

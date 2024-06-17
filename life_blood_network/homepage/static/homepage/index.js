@@ -6,4 +6,3 @@ bloodBankDetails.addEventListener('click', function (event){
 });
 
 
-// Searching functionality 

@@ -40,12 +40,32 @@ class bloodStock(models.Model):
 class order(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     timestamp = models.DateTimeField(auto_now_add=True)
-    blood_type = models.ForeignKey(bloodStock, on_delete=models.PROTECT)
-    quantity = models.IntegerField(default=0)
+    blood_details = models.ForeignKey(bloodStock, on_delete=models.PROTECT)
+    quantity = models.IntegerField(default=1)
     address = models.CharField(max_length=200)
     prescription_img = models.ImageField(upload_to="prescription_img/")
     id_proof = models.ImageField(upload_to="id_proof/")
     id_proof_patient = models.ImageField(upload_to="id_proof_patient/")
+    approve_status = models.BooleanField(default=False)
+    cancel_status = models.BooleanField(default=False)
+    rejected_status = models.BooleanField(default=False)
 
-    def __str__(self):
-        return f'{self.user} -> {self.blood_type} ordered {self.quantity} of them'
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user": self.user.first_name,
+            "user_address": self.user.address,
+            "blood_bank": self.blood_details.blood_bank.first_name,
+            "blood_bank_address": self.blood_details.blood_bank.address,
+            "delivery_address": self.address, 
+            "blood_type": self.blood_details.blood_type,
+            "quantity": self.quantity,
+            "prescription_img": self.prescription_img.url,
+            "user_id_proof": self.id_proof.url,
+            "id_proof_patient": self.id_proof_patient.url, 
+            "approve_status": self.approve_status,
+            "cancel_status": self.cancel_status,
+            "rejected_status": self.rejected_status,
+            "timestamp": self.timestamp
+        }
+                                      

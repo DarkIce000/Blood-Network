@@ -27,7 +27,7 @@
       {% endif %}
 
       <!-- // profile form -->
-      <form action="{% url 'my_profile' %}" method="post" enctype="multipart/form-data">
+      <form action="{% url 'my_profile_view' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
         {{ form }}

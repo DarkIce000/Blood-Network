@@ -1,5 +1,5 @@
 from django import forms
-from .models import User, bloodStock, order
+from .models import *
 from django.contrib.auth.forms import UserCreationForm
 
 
@@ -7,10 +7,14 @@ from django.contrib.auth.forms import UserCreationForm
 BOOTSTRAP_CLASS = { 
     'class': 'form-control my-2',
 }
-
+# Type of Input 
+file_upload = forms.FileInput(attrs=BOOTSTRAP_CLASS)
 
 STYLE_2 ={
-            'profile_img': forms.FileInput(attrs=BOOTSTRAP_CLASS),
+            'profile_img': file_upload,
+            'prescription_img': file_upload,
+            'id_proof': file_upload, 
+            'id_proof_patient': file_upload,
             'address': forms.Textarea(attrs=BOOTSTRAP_CLASS),
             'first_name': forms.TextInput(attrs=BOOTSTRAP_CLASS),
             'last_name': forms.TextInput(attrs=BOOTSTRAP_CLASS),
@@ -95,17 +99,21 @@ class RegistrationForm(UserCreationForm):
         widgets = STYLE_2
 
     
-class order(forms.ModelForm):
-    model = order
-    fields = (
-        'blood_type'
-        'quantity'
-        'address'
-        'prescription_img'
-        'id_proof'
-        'id_proof_patient'
-    )
+class orderForm(forms.ModelForm):
+    class Meta:
+        model = order 
+        fields = (
+            'quantity', 
+            'address',
+            'prescription_img',
+            'id_proof', 
+            'id_proof_patient',
+        )
+        # mod_STYLE_2 = STYLE_2
+        # mod_STYLE_2['quantity'] = forms.NumberInput(attrs={
+        #     "class":"form-control my-2",
+        #     "min":1, 
+        #     "max":"{{blood_details.quantity}}",
+        # })
 
-    widgets = STYLE_2
-
-    
+        widgets = STYLE_2

@@ -9,13 +9,13 @@
 {% block body %}
 
 <!-- drop down menus  -->
-<div class="row mt-5 justify-content-center">
+<div class="row justify-content-center align-items-end" style="height: 30vh;">
 
-  <div class="col-8">
-    <form action="{% url 'search_page' %}">
+  <div class="col-8 bg-white">
+    <form action="{% url 'search_view' %}">
       <div class="input-group input-group-lg mb-3">
         <input type="text" class="form-control" name="query" placeholder="Search: city" aria-label="Search"
-          aria-describedby="button-addon2">
+          aria-describedby="button-addon2" value="{{value}}">
         <button class="btn btn-outline-danger" type="submit" id="button-addon2">Search</button>
       </div>
     </form>
