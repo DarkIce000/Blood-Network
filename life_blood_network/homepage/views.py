@@ -5,9 +5,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
+from django.core.paginator import Paginator as pg
 from .models import *
 from .forms import *
 import json
+
 
 def addDB():
     file = open('/home/darkice/bloodData (3rd copy).json', 'r')
@@ -30,10 +32,14 @@ def index(request):
     # uncomment it for adding data to db 
     # addDB()
     list = bloodStock.objects.all()
+    paginator = pg(list, 20)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
     return render(request, "homepage/index.html", {
         "message": "Homepage",
-        "list": list 
+        "list": page_obj 
     })
+
     
 @csrf_exempt
 def approval(request):
@@ -92,7 +98,6 @@ def blood_info(request, listing_id):
 
 def search(request):
     search_result = bloodStock.objects.filter(blood_bank__address__icontains=f'{request.GET["query"]}')
-
     if not search_result:
         return render(request, "homepage/index.html", {
             "list": search_result,
@@ -127,7 +132,7 @@ def my_profile(request):
         "profile_img": profile_img
     })
 
-
+@csrf_exempt
 @login_required(login_url="login_view")
 def my_order(request):
     get_user = User.objects.get(username=request.user)
@@ -135,6 +140,13 @@ def my_order(request):
     get_rejected_orders = order.objects.filter(user=get_user, rejected_status=True) 
     get_cancelled_orders = order.objects.filter(user=get_user, cancel_status=True) 
     get_pending_orders = order.objects.filter(user=get_user, approve_status=False, cancel_status=False, rejected_status=False) 
+    if request.method =="PUT":
+        data = json.loads(request.body)
+        get_order = order.objects.get(id=data["id"])
+        if data.get("cancel_status") is not None:
+            get_order.cancel_status = True
+            get_order.save()
+
     return render(request, "homepage/order_page.html", {
         "pending_orders": get_pending_orders,
         "approved_orders": get_approved_orders, 

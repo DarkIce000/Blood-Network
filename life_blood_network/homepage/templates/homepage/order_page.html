@@ -6,7 +6,7 @@
 
   <!-- drop down menus  -->
   <div class="row justify-content-center align-items-center">
-    <div class="col-4">
+    <div class="col-8">
       <div class="accordion" id="accordionPanelsStayOpenExample">
         <div class="accordion-item">
           <h2 class="accordion-header">
@@ -19,16 +19,21 @@
               <!-- accordian body  -->
                <!-- cardbody starts here  -->
               {% for order in pending_orders %}
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">{{ order.blood_details.blood_bank.first_name }}</h5>
-                      <h5 class="card-title">{{ order.blood_details.blood_bank.username }}</h5>
-                      <p class="card-text"><i class="bi bi-geo-alt" style="size:2em; color:red;"></i><i class="bi bi-truck" style="size:2em; color:red;"></i> {{ order.address }}</p>
-                      <p class="card-text"><small class="text-body-secondary">{{ order.timestamp }}</small></p>
-                      <button type="button" class="btn btn-outline-danger"><i class="bi bi-x-circle-fill" style=" color: red;"></i> Cancel</button>
+                <div class="card my-3 " style="max-width: 540px;">
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img src="{{ order.prescription_img.url }}" class="img-fluid rounded-start" alt="...">
                     </div>
-                    <img src="{{ order.prescription_img.url }}" class="card-img-bottom" alt="prescription image">
-                  </div>
+                    <div class="col-md-8 bg-primary-subtle">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ order.blood_details.blood_bank.first_name }}</h5>
+                        <h5 class="card-title">{{ order.blood_details.blood_bank.username }}</h5>
+                        <p class="card-text"><i class="bi bi-geo-alt" style="size:2em; color:red;"></i><i class="bi bi-truck" style="size:2em; color:red;"></i> {{ order.address }}</p>
+                        <p class="card-text"><small class="text-body-secondary">{{ order.timestamp }}</small></p>
+                        <button type="button" class="btn btn-outline-danger cancel-btn" data-id="{{ order.id }}"><i class="bi bi-x-circle-fill" style=" color: red;"></i> Cancel</button>
+                      </div>
+                    </div>
+                </div>
               {% endfor %}
               <!-- card body end here  -->
             </div>
@@ -45,15 +50,20 @@
             <div class="accordion-body">
               <!-- here goes the content of the card  -->
               {% for order in approved_orders %}
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">{{ order.blood_details.blood_bank.first_name }}</h5>
-                      <p class="card-text"><i class="bi bi-geo-alt" style="size:2em; color:red;"></i><i class="bi bi-truck" style="size:2em; color:red;"></i> {{ order.address }}</p>
-                      <p class="card-text"><small class="text-body-secondary">{{ order.timestamp }}</small></p>
-                      <button type="button" class="btn btn-outline-danger"><i class="bi bi-x-circle-fill" style=" color: red;"></i> Cancel</button>
+                <div class="card mb-3" style="max-width: 540px;">
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img src="{{ order.prescription_img.url }}" class="img-fluid rounded-start" alt="...">
                     </div>
-                    <img src="{{ order.prescription_img.url }}" class="card-img-bottom" alt="prescription image">
-                  </div>
+                    <div class="col-md-8 bg-success-subtle">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ order.blood_details.blood_bank.first_name }}</h5>
+                        <h5 class="card-title">{{ order.blood_details.blood_bank.username }}</h5>
+                        <p class="card-text"><i class="bi bi-geo-alt" style="size:2em; color:red;"></i><i class="bi bi-truck" style="size:2em; color:red;"></i> {{ order.address }}</p>
+                        <p class="card-text"><small class="text-body-secondary">{{ order.timestamp }}</small></p>
+                      </div>
+                    </div>
+                </div>
               {% endfor %}
             </div>
           </div>
@@ -69,15 +79,20 @@
             <div class="accordion-body">
               <!-- here goes the content of the card  -->
               {% for order in cancelled_orders %}
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">{{ order.blood_details.blood_bank.first_name }}</h5>
-                      <p class="card-text"><i class="bi bi-geo-alt" style="size:2em; color:red;"></i><i class="bi bi-truck" style="size:2em; color:red;"></i> {{ order.address }}</p>
-                      <p class="card-text"><small class="text-body-secondary">{{ order.timestamp }}</small></p>
-                      <button type="button" class="btn btn-outline-danger"><i class="bi bi-x-circle-fill" style=" color: red;"></i> Cancel</button>
+                <div class="card my-3 " style="max-width: 540px;">
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img src="{{ order.prescription_img.url }}" class="img-fluid rounded-start" alt="...">
                     </div>
-                    <img src="{{ order.prescription_img.url }}" class="card-img-bottom" alt="prescription image">
-                  </div>
+                    <div class="col-md-8 bg-secondary-subtle">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ order.blood_details.blood_bank.first_name }}</h5>
+                        <h5 class="card-title">{{ order.blood_details.blood_bank.username }}</h5>
+                        <p class="card-text"><i class="bi bi-geo-alt" style="size:2em; color:red;"></i><i class="bi bi-truck" style="size:2em; color:red;"></i> {{ order.address }}</p>
+                        <p class="card-text"><small class="text-body-secondary">{{ order.timestamp }}</small></p>
+                      </div>
+                    </div>
+                </div>
               {% endfor %}
 
             </div>
@@ -94,15 +109,20 @@
             <div class="accordion-body">
               <!-- here goes the content of the card  -->
               {% for order in rejected_orders %}
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">{{ order.blood_details.blood_bank.first_name }}</h5>
-                      <p class="card-text"><i class="bi bi-geo-alt" style="size:2em; color:red;"></i><i class="bi bi-truck" style="size:2em; color:red;"></i> {{ order.address }}</p>
-                      <p class="card-text"><small class="text-body-secondary">{{ order.timestamp }}</small></p>
-                      <button type="button" class="btn btn-outline-danger"><i class="bi bi-x-circle-fill" style=" color: red;"></i> Cancel</button>
+                <div class="card my-3 bg-danger-subtle" style="max-width: 540px;">
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img src="{{ order.prescription_img.url }}" class="img-fluid rounded-start" alt="...">
                     </div>
-                    <img src="{{ order.prescription_img.url }}" class="card-img-bottom" alt="prescription image">
-                  </div>
+                    <div class="col-md-8 bg-secondary-subtle">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ order.blood_details.blood_bank.first_name }}</h5>
+                        <h5 class="card-title">{{ order.blood_details.blood_bank.username }}</h5>
+                        <p class="card-text"><i class="bi bi-geo-alt" style="size:2em; color:red;"></i><i class="bi bi-truck" style="size:2em; color:red;"></i> {{ order.address }}</p>
+                        <p class="card-text"><small class="text-body-secondary">{{ order.timestamp }}</small></p>
+                      </div>
+                    </div>
+                </div>
               {% endfor %}
 
             </div>
@@ -112,4 +132,7 @@
       </div>
     </div>
   </div>
+{% endblock %}
+{% block script %}
+  <script src="{% static 'homepage/order.js'%}"></script>
 {% endblock %}

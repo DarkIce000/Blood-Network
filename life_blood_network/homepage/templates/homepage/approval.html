@@ -3,30 +3,27 @@
 {% load static %}
 
 {% block body %}
+  <div class="row">
+    <div class="col-4 postion-sticky">
+      <div id="list-example" class="list-group">
+        <a class="list-group-item list-group-item-action" href="#list-item-1">For Approval</a>
+        <a class="list-group-item list-group-item-action" href="#list-item-2">Approved</a>
+        <a class="list-group-item list-group-item-action" href="#list-item-3">Rejected</a>
+      </div>
+    </div>
 
+    <div class="col-8">
+      <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
+        <h4 id="list-item-1">For Approval</h4>
+          <div class="col my-3" id="for-approval"></div>
+        <h4 id="list-item-2">Approved</h4>
+          <div class="col my-3" id="approved"></div>
+        <h4 id="list-item-3" >Rejected</h4>
+          <div class="col my-3" id="rejected">
+          </div>
+      </div>
+  </div>
   <!-- drop down menus  -->
-  <div class="row justify-content-center align-items-center">
-    <h1>For Approval</h1>
-    <div class="col-8" id="for-approval">
-          <!-- content from js goes here  approval-->
-    </div>
-  </div>
-  <div class="row justify-content-center align-items-center">
-    <h1>Approved</h1>
-    <div class="col-8" id="approved">
-          <!-- content from js goes here  approval-->
-    </div>
-  </div>
-  <div class="row justify-content-center align-items-center">
-    <h1>Rejected</h1>
-    <div class="col-8" id="rejected">
-          <!-- content from js goes here  approval-->
-    </div>
-  </div>
-
-  <div class="row justify-content-center">
-
-  </div>
 {% endblock %}
 
 {% block script%}

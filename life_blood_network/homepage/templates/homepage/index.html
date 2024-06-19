@@ -9,7 +9,7 @@
 {% block body %}
 
 <!-- drop down menus  -->
-<div class="row justify-content-center align-items-end" style="height: 30vh;">
+<div class="row justify-content-center align-items-end" style="height: 10vh;">
 
   <div class="col-8 bg-white">
     <form action="{% url 'search_view' %}">
@@ -27,12 +27,13 @@
 
   <div class="col-8">
     <!-- list -->
-    <ol class="list-group list-group-numbered" id="listTable">
+    <ol class="list-group " id="listTable">
       {% if not list %}
         <h4 class="align-self-center">No Data</h4>
       {% else %}
         {% for listing in list %}
           <li data-listId="{{ listing.id }}" class="list-group-item d-flex justify-content-between align-items-start blood-list">
+            <div>{{ listing.id }}.  </div>
             <div data-listId="{{ listing.id }}" class="ms-2 me-auto blood-list" id="bloodBankDetails">
               <div class="fw-bold blood-list" data-listId="{{ listing.id }}">{{listing.blood_bank.first_name}}</div>
               {{listing.blood_bank.address}}
@@ -44,7 +45,28 @@
     </ol>
   </div>
 
-</div>
+      <nav aria-label="...">
+        <ul class="pagination justify-content-center mt-3">
+          {% if list.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ list.previous_page_number }}" style="color:red;">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#" style="color:red;">{{ list.previous_page_number }}</a></li>
+          {% endif %}
+
+          <li class="page-item active" aria-current="page">
+            <a class="page-link" href="#" style="color:white; background-color: crimson;">{{ list.number }}</a>
+          </li>
+
+          {% if list.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ list.next_page_number }}" style="color:red;">{{ list.next_page_number }}</a></li>
+            <li class="page-item">
+              <a class="page-link" href="?page={{ list.next_page_number }}" style="color:red;">Next</a>
+            </li>
+          {%endif %}
+        </ul>
+      </nav>
+
 {% endblock %}
 
 {% block script %}
