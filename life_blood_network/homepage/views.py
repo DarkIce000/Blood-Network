@@ -32,7 +32,7 @@ def index(request):
     # uncomment it for adding data to db 
     # addDB()
     list = bloodStock.objects.all()
-    paginator = pg(list, 20)
+    paginator = pg(list, 15)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     return render(request, "homepage/index.html", {

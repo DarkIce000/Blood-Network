@@ -6,7 +6,7 @@
 
 <!-- drop down menus  -->
 <div class="row justify-content-evenly align-items-center">
-  <div class="col-3 p-3 shadow-lg  border border-danger-subtle rounded">
+  <div class="col p-3  mx-2 shadow-lg  border border-danger-subtle rounded">
     <!-- table goes here for details showing  -->
     <table class="table">
       <thead>
@@ -40,7 +40,7 @@
     </table>
   </div>
   
-  <div class="col-6 p-3 border border-danger-subtle rounded mt-5 shadow-lg" >
+  <div class="col p-3 border border-danger-subtle rounded mt-5 shadow-lg" >
     
     <h1>Fill out the Form </h1>
     <form action="{% url 'blood_info_view' blood_details.id %}" method="POST" enctype="multipart/form-data">

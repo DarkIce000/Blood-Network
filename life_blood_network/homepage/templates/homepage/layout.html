@@ -31,18 +31,32 @@
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="{% url 'index_view'%}">Home</a>
                 </li>
-
+              {% if not user.is_authenticated %}
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="{% url 'register_view'%}">Register</a>
                 </li>
 
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'my_orders_view'%}">My Orders</a>
+                  <a class="nav-link active" aria-current="page" href="{% url 'login_view'%}">Login</a>
                 </li>
+              {% endif %}
+              {% if user.is_authenticated %}
 
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'add_blood_view'%}">Add Blood-Stock</a>
-                </li>
+                {% if user.user_type == "reciever"%}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'my_orders_view'%}">My Orders</a>
+                  </li>
+                {% endif %}
+
+                {% if user.user_type == "provider"%}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'add_blood_view'%}">Add Blood-Stock</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'approval_view'%}">Approvals</a>
+                  </li>
+                {% endif %}
 
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'my_profile_view' %}">My Profile</a>
@@ -50,6 +64,7 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'logout_view'%}">Logout</a>
                 </li>
+              {% endif %}
               </ul>
             </div>
           </div>
