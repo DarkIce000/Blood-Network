@@ -11,7 +11,7 @@
 <!-- drop down menus  -->
 <div class="row justify-content-center align-items-end" style="height: 10vh;">
 
-  <div class="col-8 bg-white">
+  <div class="col-lg-8  col-sm-12 bg-white">
     <form action="{% url 'search_view' %}">
       <div class="input-group input-group-lg mb-3">
         <input type="text" class="form-control" name="query" placeholder="Search: city" aria-label="Search"
@@ -25,7 +25,7 @@
 
 <div class="row justify-content-center">
 
-  <div class="col-8">
+  <div class="col-lg-8 col-sm-12">
     <!-- list -->
     <ol class="list-group " id="listTable">
       {% if not list %}

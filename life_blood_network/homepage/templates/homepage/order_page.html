@@ -4,132 +4,84 @@
 
 {% block body %}
 
-  <!-- drop down menus  -->
-  <div class="row justify-content-center align-items-center">
-    <div class="col-8">
-      <div class="accordion" id="accordionPanelsStayOpenExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-              Pending Approval Applications 
-            </button>
-          </h2>
-          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-            <div class="accordion-body">
-              <!-- accordian body  -->
-               <!-- cardbody starts here  -->
-              {% for order in pending_orders %}
-                <div class="card my-3 " style="max-width: 540px;">
-                  <div class="row g-0">
-                    <div class="col-md-4">
-                      <img src="{{ order.prescription_img.url }}" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8 bg-primary-subtle">
-                      <div class="card-body">
-                        <h5 class="card-title">{{ order.blood_details.blood_bank.first_name }}</h5>
-                        <h5 class="card-title">{{ order.blood_details.blood_bank.username }}</h5>
-                        <p class="card-text"><i class="bi bi-geo-alt" style="size:2em; color:red;"></i><i class="bi bi-truck" style="size:2em; color:red;"></i> {{ order.address }}</p>
-                        <p class="card-text"><small class="text-body-secondary">{{ order.timestamp }}</small></p>
-                        <button type="button" class="btn btn-outline-danger cancel-btn" data-id="{{ order.id }}"><i class="bi bi-x-circle-fill" style=" color: red;"></i> Cancel</button>
-                      </div>
-                    </div>
-                </div>
-              {% endfor %}
-              <!-- card body end here  -->
-            </div>
-          </div>
+  <div class="row">
+    <h2>Pending</h2>
+    <div class="col">
+      {% for order in pending_orders %}
+      <div class="card my-4 bg-primary-subtle">
+        <div class="card-header d-flex justify-content-between">
+          Pending
+          <span>{{ order.timestamp }}</span>
         </div>
-
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed bg-success" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-              Approved Applications
-            </button>
-          </h2>
-          <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-            <div class="accordion-body">
-              <!-- here goes the content of the card  -->
-              {% for order in approved_orders %}
-                <div class="card mb-3" style="max-width: 540px;">
-                  <div class="row g-0">
-                    <div class="col-md-4">
-                      <img src="{{ order.prescription_img.url }}" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8 bg-success-subtle">
-                      <div class="card-body">
-                        <h5 class="card-title">{{ order.blood_details.blood_bank.first_name }}</h5>
-                        <h5 class="card-title">{{ order.blood_details.blood_bank.username }}</h5>
-                        <p class="card-text"><i class="bi bi-geo-alt" style="size:2em; color:red;"></i><i class="bi bi-truck" style="size:2em; color:red;"></i> {{ order.address }}</p>
-                        <p class="card-text"><small class="text-body-secondary">{{ order.timestamp }}</small></p>
-                      </div>
-                    </div>
-                </div>
-              {% endfor %}
-            </div>
-          </div>
+        <div class="card-body">
+          <h5 class="card-title">
+            <strong>{{ order.blood_details.blood_bank.first_name }}</strong>-- {{ order.blood_details.blood_bank.username }}
+          </h5>
+          <p class="card-text">{{ order.address }}</p>
+          <button class="btn btn-outline-danger cancel-btn" data-id="{{order.id}}"> cancel</button>
         </div>
-
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed bg-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-              Cancelled
-            </button>
-          </h2>
-          <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-            <div class="accordion-body">
-              <!-- here goes the content of the card  -->
-              {% for order in cancelled_orders %}
-                <div class="card my-3 " style="max-width: 540px;">
-                  <div class="row g-0">
-                    <div class="col-md-4">
-                      <img src="{{ order.prescription_img.url }}" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8 bg-secondary-subtle">
-                      <div class="card-body">
-                        <h5 class="card-title">{{ order.blood_details.blood_bank.first_name }}</h5>
-                        <h5 class="card-title">{{ order.blood_details.blood_bank.username }}</h5>
-                        <p class="card-text"><i class="bi bi-geo-alt" style="size:2em; color:red;"></i><i class="bi bi-truck" style="size:2em; color:red;"></i> {{ order.address }}</p>
-                        <p class="card-text"><small class="text-body-secondary">{{ order.timestamp }}</small></p>
-                      </div>
-                    </div>
-                </div>
-              {% endfor %}
-
-            </div>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed bg-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-              Rejected 
-            </button>
-          </h2>
-          <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-            <div class="accordion-body">
-              <!-- here goes the content of the card  -->
-              {% for order in rejected_orders %}
-                <div class="card my-3 bg-danger-subtle" style="max-width: 540px;">
-                  <div class="row g-0">
-                    <div class="col-md-4">
-                      <img src="{{ order.prescription_img.url }}" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8 bg-secondary-subtle">
-                      <div class="card-body">
-                        <h5 class="card-title">{{ order.blood_details.blood_bank.first_name }}</h5>
-                        <h5 class="card-title">{{ order.blood_details.blood_bank.username }}</h5>
-                        <p class="card-text"><i class="bi bi-geo-alt" style="size:2em; color:red;"></i><i class="bi bi-truck" style="size:2em; color:red;"></i> {{ order.address }}</p>
-                        <p class="card-text"><small class="text-body-secondary">{{ order.timestamp }}</small></p>
-                      </div>
-                    </div>
-                </div>
-              {% endfor %}
-
-            </div>
-          </div>
-        </div>
-
       </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="row">
+    <H2>Approved</H2>
+    <div class="col">
+      {% for order in approved_orders %}
+      <div class="card my-4 bg-success-subtle">
+        <div class="card-header d-flex justify-content-between">
+          Cancelled
+          <span>{{ order.timestamp }}</span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">
+            <strong>{{ order.blood_details.blood_bank.first_name }}</strong>-- {{ order.blood_details.blood_bank.username }}
+          </h5>
+          <p class="card-text">{{ order.address }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="row">
+    <H2>Cancelled</H2>
+    <div class="col">
+      {% for order in cancelled_orders %}
+      <div class="card my-4 bg-dark-subtle">
+        <div class="card-header d-flex justify-content-between">
+          Cancelled
+          <span>{{ order.timestamp }}</span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">
+            <strong>{{ order.blood_details.blood_bank.first_name }}</strong>-- {{ order.blood_details.blood_bank.username }}
+          </h5>
+          <p class="card-text">{{ order.address }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="row">
+    <H2>Rejected</H2>
+    <div class="col">
+      {% for order in rejected_orders %}
+      <div class="card my-4 bg-danger-subtle">
+        <div class="card-header d-flex justify-content-between">
+          Cancelled
+          <span>{{ order.timestamp }}</span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">
+            <strong>{{ order.blood_details.blood_bank.first_name }}</strong>-- {{ order.blood_details.blood_bank.username }}
+          </h5>
+          <p class="card-text">{{ order.address }}</p>
+        </div>
+      </div>
+      {% endfor %}
     </div>
   </div>
 {% endblock %}
