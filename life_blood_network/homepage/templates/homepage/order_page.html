@@ -4,9 +4,9 @@
 
 {% block body %}
 
-  <div class="row">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-sm-12">
     <h2>Pending</h2>
-    <div class="col">
       {% for order in pending_orders %}
       <div class="card my-4 bg-primary-subtle">
         <div class="card-header d-flex justify-content-between">
@@ -25,9 +25,9 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-sm-12">
     <H2>Approved</H2>
-    <div class="col">
       {% for order in approved_orders %}
       <div class="card my-4 bg-success-subtle">
         <div class="card-header d-flex justify-content-between">
@@ -45,9 +45,9 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-sm-12">
     <H2>Cancelled</H2>
-    <div class="col">
       {% for order in cancelled_orders %}
       <div class="card my-4 bg-dark-subtle">
         <div class="card-header d-flex justify-content-between">
@@ -65,9 +65,9 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-sm-12">
     <H2>Rejected</H2>
-    <div class="col">
       {% for order in rejected_orders %}
       <div class="card my-4 bg-danger-subtle">
         <div class="card-header d-flex justify-content-between">
