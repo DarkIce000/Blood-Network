@@ -11,6 +11,13 @@ BOOTSTRAP_CLASS = {
 file_upload = forms.FileInput(attrs=BOOTSTRAP_CLASS)
 
 STYLE_2 ={
+            'username': forms.TextInput(
+                attrs={
+                'class': 'form-control my-2 disabled',
+                'placeholder':'Disabled input',
+                'aria-label':'Disabled input example'
+                }), 
+
             'profile_img': file_upload,
             'prescription_img': file_upload,
             'id_proof': file_upload, 
@@ -35,6 +42,7 @@ class ProfilePageForm(forms.ModelForm):
     class Meta:
         model = User
         fields = (
+            'username',
             'first_name',
             'last_name',
             'profile_img',
