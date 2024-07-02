@@ -44,7 +44,7 @@ def index(request):
 @csrf_exempt
 def approval(request):
     get_user = User.objects.get(username=request.user)
-    get_orders = order.objects.filter(blood_details__blood_bank=get_user)
+    get_orders = order.objects.filter(blood_detarsils__blood_bank=get_user)
 
     if request.method == "PUT":
         user_input = json.loads(request.body)
