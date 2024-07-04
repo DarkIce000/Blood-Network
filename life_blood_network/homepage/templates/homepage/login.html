@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% block title %} - login {% endblock %}
+
 {% block body %}
 {% if message %}
 
@@ -35,7 +37,7 @@
 				<input type="password" name="password" class="form-control" id="exampleInputPassword1">
 			</div>
 			<div class="d-flex justify-content-center">
-				<button type="submit" class="btn btn-primary text-center">Login</button>
+				<button type="submit" class="btn btn-danger text-center">Login</button>
 			</div>
 
 		</form>

@@ -1,6 +1,7 @@
 {% extends 'homepage/layout.html'%}
 
 {% load static %}
+{% block title %} - make order {% endblock %}
 
 {% block body %}
 
@@ -43,12 +44,45 @@
   <div class="col-xxl-6 col-sm-10 p-3 m-1 border border-danger-subtle rounded shadow-lg" >
     
     <h1>Fill out the Form </h1>
-    <form action="{% url 'blood_info_view' blood_details.id %}" method="POST" enctype="multipart/form-data">
+    <form action="{% url 'blood_info_view' blood_details.id %}" method="POST" enctype="multipart/form-data" id="order-form">
       {% csrf_token %}
       {{ order_form }}
-      <button type="submit" class="btn btn-outline-danger">Submit</button>
+      <button type="submit" class="btn btn-outline-danger" id="order-btn">Submit</button>
     </form>
     
   </div>
 </div>
+<input type="hidden" id="user" value="{{ request.user }}" /> 
+
+<script>
+  const orderBtn = document.getElementById('order-btn');
+  const requestUser = document.getElementById('user');
+  const orderForm = document.getElementById('order-form')
+ 
+  async function notify() {
+    const a = await new Notification(`Hii ${requestUser.value},`,  {
+      body: "Your order has been placed",
+      icon: "{% static 'homepage/logo.svg'%}"
+    });
+    return a;
+  }
+
+
+  orderBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    if("Notification" in window){
+      const permission = Notification.requestPermission();
+      permission.then((a) => {
+        if (Notification.permission === "granted"){
+          notify().then(()=> {
+            orderForm.submit();
+          })
+        }else{
+          orderForm.submit();
+        }
+      });
+    } 
+  })
+</script>
+
 {% endblock %}

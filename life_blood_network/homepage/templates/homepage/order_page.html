@@ -1,6 +1,7 @@
 {% extends 'homepage/layout.html'%}
 
 {% load static %}
+{% block title %} - orders {% endblock %}
 
 {% block body %}
 
@@ -15,9 +16,12 @@
         </div>
         <div class="card-body">
           <h5 class="card-title">
-            <strong>{{ order.blood_details.blood_bank.first_name }}</strong>-- {{ order.blood_details.blood_bank.username }}
+            <strong>{{ order.blood_details.blood_bank.first_name }}</strong>
           </h5>
-          <p class="card-text">{{ order.address }}</p>
+          <div class="col" style="width: 100;">
+            <p class="card-text" style="display: inline-block;">{{ order.address }}</p>
+            <span class="badge bg-danger rounded-pill align-self-end" >{{order.blood_details.blood_type }}</span>
+          </div>
           <button class="btn btn-outline-danger cancel-btn" data-id="{{order.id}}"> cancel</button>
         </div>
       </div>
@@ -31,12 +35,12 @@
       {% for order in approved_orders %}
       <div class="card my-4 bg-success-subtle">
         <div class="card-header d-flex justify-content-between">
-          Cancelled
+          approved
           <span>{{ order.timestamp }}</span>
         </div>
         <div class="card-body">
           <h5 class="card-title">
-            <strong>{{ order.blood_details.blood_bank.first_name }}</strong>-- {{ order.blood_details.blood_bank.username }}
+            <strong>{{ order.blood_details.blood_bank.first_name }}</strong>
           </h5>
           <p class="card-text">{{ order.address }}</p>
         </div>
@@ -56,7 +60,7 @@
         </div>
         <div class="card-body">
           <h5 class="card-title">
-            <strong>{{ order.blood_details.blood_bank.first_name }}</strong>-- {{ order.blood_details.blood_bank.username }}
+            <strong>{{ order.blood_details.blood_bank.first_name }}</strong>
           </h5>
           <p class="card-text">{{ order.address }}</p>
         </div>
@@ -71,12 +75,12 @@
       {% for order in rejected_orders %}
       <div class="card my-4 bg-danger-subtle">
         <div class="card-header d-flex justify-content-between">
-          Cancelled
+          Rejected
           <span>{{ order.timestamp }}</span>
         </div>
         <div class="card-body">
           <h5 class="card-title">
-            <strong>{{ order.blood_details.blood_bank.first_name }}</strong>-- {{ order.blood_details.blood_bank.username }}
+            <strong>{{ order.blood_details.blood_bank.first_name }}</strong>
           </h5>
           <p class="card-text">{{ order.address }}</p>
         </div>

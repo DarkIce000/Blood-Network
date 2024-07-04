@@ -1,6 +1,7 @@
 {% extends 'homepage/layout.html'%}
 
 {% load static %}
+{% block title %} - update profile {% endblock %}
 
 {% block body %}
 
@@ -31,7 +32,7 @@
         {% csrf_token %}
 
         {{ form }}
-        <button type="submit" class="btn btn-primary d-flex">Save Changess</button>
+        <button type="submit" class="btn btn-danger d-flex">save changes</button>
       </form>
     </div>
   </div>

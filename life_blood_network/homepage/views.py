@@ -1,6 +1,6 @@
 from django.forms import ValidationError
 from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse, Http404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
@@ -43,8 +43,11 @@ def index(request):
     
 @csrf_exempt
 def approval(request):
-    get_user = User.objects.get(username=request.user)
-    get_orders = order.objects.filter(blood_detarsils__blood_bank=get_user)
+    try:
+        get_user = User.objects.get(username=request.user)
+        get_orders = order.objects.filter(blood_details__blood_bank=get_user)
+    except:
+        raise Http404("something not right")
 
     if request.method == "PUT":
         user_input = json.loads(request.body)
