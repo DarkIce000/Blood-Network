@@ -65,7 +65,6 @@ First this Web App is running [here](https://aarav7397.pythonanywhere.com). or Y
 
 ![Screenshot_4-7-2024_143613_aarav7397.pythonanywhere.com.jpeg](Blood%20Network%2010c376d5a4c34a02af94f4c0fb779f2a/Screenshot_4-7-2024_143613_aarav7397.pythonanywhere.com.jpeg)
 
-![2024-07-04_15-10_1.png](Blood%20Network%2010c376d5a4c34a02af94f4c0fb779f2a/2024-07-04_15-10_1.png)
 
 ![Screenshot_4-7-2024_15413_aarav7397.pythonanywhere.com.jpeg](Blood%20Network%2010c376d5a4c34a02af94f4c0fb779f2a/Screenshot_4-7-2024_15413_aarav7397.pythonanywhere.com.jpeg)
 
