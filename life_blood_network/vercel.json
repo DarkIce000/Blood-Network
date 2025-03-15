@@ -2,14 +2,14 @@
     "version": 2,
     "builds": [
         {
-            "src": "life_blood_network/life_blood_network/wsgi.py",
+            "src": "life_blood_network/wsgi.py",
             "use": "@vercel/node"
         }
     ],
     "routes": [
         {
-            "src": "life_blood_network/(.*)",
-            "dest": "life_blood_network/life_blood_network/wsgi.py"
+            "src": "/(.*)",
+            "dest": "life_blood_network/wsgi.py"
         }
     ]
 }
