@@ -1,2 +1,7 @@
+asgiref==3.11.1
 Django==5.0.6
-Pillow
+gunicorn==26.0.0
+packaging==26.2
+pillow==12.2.0
+python-dotenv==1.2.2
+sqlparse==0.5.5
